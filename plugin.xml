@@ -1,0 +1,64 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="com.ingenious.cordova.VoiceRecognise"
+        version="0.1"
+        xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android">
+    
+    <name>VoiceRecognise</name>
+    <dependency id="org.apache.cordova.file" version=">=1.0.1" />
+    <dependency id="org.apache.cordova.file-transfer" version=">=1.0.1" />
+    
+    <js-module name="VoiceRecognise"
+               src="www/VoiceRecognise.js">
+        <clobbers target="cordova.plugins.VoiceRecognise" />
+    </js-module>
+    <js-module src="www/MediaError.js" name="MediaError">
+        <clobbers target="window.MediaError" />
+    </js-module>
+    
+    <js-module src="www/Media.js" name="Media">
+        <clobbers target="window.Media" />
+    </js-module>
+
+     <js-module src="www/Canvas2ImagePlugin.js" name="Canvas2ImagePlugin">
+        <clobbers target="window.canvas2ImagePlugin" />
+    </js-module>
+
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="VoiceRecognise">
+                <param name="ios-package" value="CDVVoiceRecognise" />
+            </feature>
+            <feature name="Media">
+                <param name="ios-package" value="CDVSound" />
+            </feature>
+<feature name="Canvas2ImagePlugin">
+                <param name="ios-package" value="Canvas2ImagePlugin"/>
+                <param name="onload" value="true" />
+            </feature>
+
+        </config-file>
+          <!-- The app is able to run in background through audio mode -->
+        
+
+	<header-file src="src/ios/Canvas2ImagePlugin.h" />
+
+        <source-file src="src/ios/Canvas2ImagePlugin.m"   compiler-flags="-fno-objc-arc" />
+        <header-file src="src/ios/CDVSound.h" />
+        <source-file src="src/ios/CDVSound.m" />
+
+        <header-file src="src/ios/CDVVoiceRecognise.h" />
+        <source-file src="src/ios/CDVVoiceRecognise.m" />
+		<header-file src="src/ios/BackgroundTask.h" />
+        <source-file src="src/ios/BackgroundTask.m" />
+
+        <resource-file src="src/ios/Framework/AcousticModelEnglish.bundle" />
+        <resource-file src="src/ios/Framework/AcousticModelSpanish.bundle" />
+        
+        <framework src="src/ios/Framework/OpenEars.framework" custom="true"/>
+        <framework src="src/ios/Framework/Slt.framework" custom="true"/>
+        <framework src="AVFoundation.framework" />
+        <framework src="AudioToolbox.framework" />
+
+    </platform>
+</plugin>
